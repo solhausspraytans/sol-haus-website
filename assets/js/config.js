@@ -77,7 +77,7 @@ window.SOL_HAUS = {
 
   /* ---------- SETUP HELPERS ---------- */
   showSetupNotice: false,       // small "preview" chip listing missing links — set to false at launch
-  showApprovalFlags: true,     // shows "Draft — needs Sol Haus approval" tags on care instructions
+  showApprovalFlags: false,     // shows "Draft — needs Sol Haus approval" tags on care instructions
 
   /* ---------- SERVICES & PRICES ----------
      price: "" shows "Pricing coming soon". Example: price: "$75"           */

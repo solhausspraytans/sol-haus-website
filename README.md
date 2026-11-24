@@ -20,7 +20,7 @@ sitemap.xml  robots.txt
 1. Create a free account at **pages.cloudflare.com**.
 2. **Workers & Pages → Create → Pages → Upload assets** (direct upload).
 3. Name the project (e.g. `solhaus`) and drag the whole `sol-haus` folder in. Deploy.
-4. Your site is live at `https://solhaus.pages.dev`.
+4. Your site is live at `https://solhaustans.com`.
 5. Optional: **Custom domains** → add a domain you own (domains cost ~$10–15/yr; hosting stays free).
 6. To update later: open the project → **Create new deployment** → upload the folder again.
 

@@ -15,8 +15,8 @@ window.SOL_HAUS = {
   business: {
     name: "Sol Haus Spray Tans",
     email: "hangtanspray@gmail.com",
-    serviceArea: "Long Island and all five boroughs of New York City",
-    serviceAreaShort: "Long Island & NYC",
+    serviceArea: "Long Island, all five boroughs of New York City and New Jersey",
+    serviceAreaShort: "Long Island, NYC & NJ",
     siteUrl: "https://solhaustans.com",   // used for SEO/sharing once you have a domain
   },
 
@@ -72,7 +72,7 @@ window.SOL_HAUS = {
   /* ---------- ANNOUNCEMENT BAR (top of every page) ---------- */
   announcement: {
     show: true,
-    text: "Now booking spray tans across Long Island & all five boroughs",
+    text: "Now booking spray tans across Long Island, the five boroughs & NJ",
   },
 
   /* ---------- SETUP HELPERS ---------- */

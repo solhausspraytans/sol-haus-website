@@ -17,7 +17,7 @@ window.SOL_HAUS = {
     email: "hangtanspray@gmail.com",
     serviceArea: "Long Island and all five boroughs of New York City",
     serviceAreaShort: "Long Island & NYC",
-    siteUrl: "https://YOUR-DOMAIN.com",   // used for SEO/sharing once you have a domain
+    siteUrl: "https://solhaus.pages.dev",   // used for SEO/sharing once you have a domain
   },
 
   /* ---------- LINKS (paste full URLs, starting with https://) ---------- */
@@ -76,7 +76,7 @@ window.SOL_HAUS = {
   },
 
   /* ---------- SETUP HELPERS ---------- */
-  showSetupNotice: true,       // small "preview" chip listing missing links — set to false at launch
+  showSetupNotice: false,       // small "preview" chip listing missing links — set to false at launch
   showApprovalFlags: true,     // shows "Draft — needs Sol Haus approval" tags on care instructions
 
   /* ---------- SERVICES & PRICES ----------

@@ -256,8 +256,9 @@
     if (!hero || !V.src) return false;
     const mq = $(".marquee", hero); if (mq) mq.remove();
     const v = document.createElement("video");
-    v.className = "hero__video"; v.src = V.src; v.muted = true; v.loop = true; v.playsInline = true;
-    v.setAttribute("playsinline", ""); v.setAttribute("aria-hidden", "true");
+    v.className = "hero__video"; v.muted = true; v.defaultMuted = true; v.loop = true; v.playsInline = true;
+    ["muted", "playsinline", "webkit-playsinline", "loop", "autoplay"].forEach((k) => v.setAttribute(k, ""));
+    v.setAttribute("preload", "auto"); v.setAttribute("aria-hidden", "true"); v.src = V.src;
     if (V.poster) v.poster = V.poster;
     // blurred copy fills the wide screen behind the vertical video
     const bg = v.cloneNode(); bg.className = "hero__video-bg"; bg.muted = true;
@@ -266,11 +267,18 @@
     if (!reduceMotion.matches) bg.play().catch(() => {});
     const btn = $("[data-marquee-toggle]", hero);
     if (reduceMotion.matches) { if (btn) { btn.setAttribute("aria-pressed", "true"); btn.querySelector("span").textContent = "Play"; } }
-    else v.play().catch(() => {});
+    else {
+      // keep nudging the video to play (some phones block the first try)
+      const kick = () => { if (v.paused && !v.dataset.userPaused) v.play().catch(() => {}); };
+      kick();
+      ["loadeddata", "canplay"].forEach((ev) => v.addEventListener(ev, kick));
+      ["touchstart", "scroll", "click"].forEach((ev) => window.addEventListener(ev, kick, { once: true, passive: true }));
+      document.addEventListener("visibilitychange", () => { if (!document.hidden) kick(); });
+    }
     if (btn) btn.addEventListener("click", () => {
       const bgv = $(".hero__video-bg", hero);
-      if (v.paused) { v.play(); bgv && bgv.play(); btn.setAttribute("aria-pressed", "false"); btn.querySelector("span").textContent = "Pause"; }
-      else { v.pause(); bgv && bgv.pause(); btn.setAttribute("aria-pressed", "true"); btn.querySelector("span").textContent = "Play"; }
+      if (v.paused) { delete v.dataset.userPaused; v.play(); bgv && bgv.play(); btn.setAttribute("aria-pressed", "false"); btn.querySelector("span").textContent = "Pause"; }
+      else { v.dataset.userPaused = "1"; v.pause(); bgv && bgv.pause(); btn.setAttribute("aria-pressed", "true"); btn.querySelector("span").textContent = "Play"; }
     });
     return true;
   }

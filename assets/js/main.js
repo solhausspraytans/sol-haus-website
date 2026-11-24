@@ -269,7 +269,20 @@
     if (reduceMotion.matches) { if (btn) { btn.setAttribute("aria-pressed", "true"); btn.querySelector("span").textContent = "Play"; } }
     else {
       // keep nudging the video to play (some phones block the first try)
-      const kick = () => { if (v.paused && !v.dataset.userPaused) v.play().catch(() => {}); };
+      // iPhone Low Power Mode blocks video autoplay; Safari still plays an mp4 inside <img>, so swap to that
+      let swapped = false;
+      const swap = () => {
+        if (swapped) return; swapped = true;
+        const im = new Image(); im.alt = ""; im.setAttribute("aria-hidden", "true");
+        im.onload = () => {
+          const ib = im.cloneNode(); ib.className = "hero__video-bg";
+          im.className = "hero__video"; v.replaceWith(im);
+          const bgv = $(".hero__video-bg", hero); if (bgv) bgv.replaceWith(ib);
+          if (btn) btn.hidden = true;
+        };
+        im.src = V.src;
+      };
+      const kick = () => { if (!swapped && v.paused && !v.dataset.userPaused) v.play().catch((e) => { if (e && e.name === "NotAllowedError") swap(); }); };
       kick();
       ["loadeddata", "canplay"].forEach((ev) => v.addEventListener(ev, kick));
       ["touchstart", "scroll", "click"].forEach((ev) => window.addEventListener(ev, kick, { once: true, passive: true }));

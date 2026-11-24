@@ -656,3 +656,7 @@ section { position: relative; }
 
 .resource-list--one { grid-template-columns: 1fr; max-width: 760px; }
 .resource-list--one .resource { text-align: center; }
+
+/* hide Safari's big play icon over the hero video */
+.hero__video::-webkit-media-controls-start-playback-button, .hero__video-bg::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; }
+.hero__video::-webkit-media-controls { display: none !important; }
